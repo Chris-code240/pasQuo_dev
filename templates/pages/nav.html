@@ -1,0 +1,46 @@
+{%block content %}
+<div class="container py-0">
+    {% if nav != False %}
+    <nav class="navbar navbar-expand-lg bg-secondary nav-wrapper navbar-dark mt-1 py-0" id="navbar">
+        <a href="/" class="navbar-brand bg-black text-white py-3 px-3">UENR PASQUO</a>
+        <button class="navbar-toggler m-2" type="button" data-bs-toggle="collapse" data-bs-target="#nav-menu">
+            <span class="navbar-toggler-icon"></span>
+        </button> 
+        <div class="collapse navbar-collapse" id="nav-menu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item d-flex align-items-center mx-2">
+                    {% if FAQ == True %}
+                    <a href="#" class="nav-link text-black text-align-center ">FAQ</a>
+                    {% endif %}
+                </li>
+                <li class="nav-item d-flex align-items-center mx-2">
+                    {% if HELP == True %}
+                    <a href="#" class="nav-link text-black text-align-center">HELP</a>
+                    {% endif %}
+                </li>
+                <li class="nav-item d-flex align-items-center d-flex align-items-center mx-2">
+                    {% if start_btn == True %}
+                    <a href="/user-select" class="nav-link text-black">
+                        <button class="btn bg-white text-black px-4 border-0">START</button>
+                    </a>
+                    {% endif %}
+                </li>
+                <li class="nav-item d-flex align-items-center mx-2">
+                    {% if year_selection == True %}
+                        <select name="nav-year" id="nav-year" class="form-control form-select px-5">
+                                {% for y in years %}
+                                    {% if year == y%}
+                                        <option value="{{y}}" selected>{{y}} </option>
+                                    {% else %}
+                                        <option value="{{y}}">{{y}}</option>
+                                    {% endif %}
+                                {% endfor %}
+                        </select>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% endif %}
+</div>
+{%endblock %}

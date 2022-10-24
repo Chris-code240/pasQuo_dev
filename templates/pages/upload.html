@@ -1,0 +1,200 @@
+{% extends 'layout/layout.html' %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/pages/select-paper.css')}}">
+<style>
+    .hide { position:absolute; top:-1px; left:-1px; width:1px; height:1px; }
+  </style>
+{% endblock %}
+{%block content %}
+<!-- Modal -->
+
+    <section class="container d-flex flex-column align-items-center justify-content-center p-3">
+        <div class="container my-2">
+            <h1 class="text-center h1">
+                Upload Question Paper
+            </h1>
+           <div class="container">
+            <p class="text-center w-10">
+                Add to a list of all past
+                questions in the university's domain from 2017.
+            </p>
+           </div>
+        </div>
+        <div class="container bg-secondary  px-5 py-2 rounded-lg d-flex justify-content-center align-items-center form-wrapper">
+            <form action="/questions" class="form text-center p-0 w-100" id="upload-form" target="modal" name="upload-form" method="POST" enctype="multipart/form-data" >
+                    
+                <div class="container">
+                    <label for="year" class="label form-control form-wrapper border-0 text-start">Year</label>
+                    <select class="level form-control  form-data bg-black text-white" id="year" name="year">
+                        <option value="--select level--">--Select Year--</option>
+                        <option value="2017" class="form-control">2017</option>
+                        <option value="2018" class="form-control">2018</option>
+                        <option value="2019" class="form-control">2019</option>
+                        <option value="2020" class="form-control">2020</option>
+                        <option value="2021" class="form-control">2021</option>
+                        <option value="2022" class="form-control">2022</option>
+                    </select>
+                </div>
+                <div class="container w-20">
+                    <label for="program" class="label form-control form-wrapper border-0 text-start">Program</label>
+                    <select class="level form-control form-data bg-black text-white" id="program" name="program">
+                        <option value="--select program--">--Select Program--</option>
+                        <option value="Bsc Computer Science" class="form-control">Bsc Computer Science</option>
+                        <option value="Bsc Information Technology" class="form-control">Bsc Information Technology</option>
+                        <option value="Bsc Electrical Engineering" class="form-control">Bsc Electrical Engineering</option>
+                    </select>
+                </div>
+    
+    
+                <div class="container">
+                    <label for="course" class="label form-control form-wrapper border-0 text-start">Course</label>
+                    <select class="level form-control  form-data bg-black text-white" id="course" name="course">
+                        <option value="--select course--">--Select Course--</option>
+                        <option value="Advanced Database" class="form-control">Advanced Database</option>
+                        <option value="Digital Electronics" class="form-control">Digital Electronics</option>
+                        <option value="Numerical Methods" class="form-control">Numerical Methods</option>
+                        <option value="Software Engineering" class="form-control">Software Enginerring</option>
+                        <option value="Computer Architecture" class="form-control">Computer Architecture</option>
+                        <option value="Data Communication and Network" class="form-control">Data Communication and Network</option>
+                        <option value="Analytical Reading and Reasoning" class="form-control">Analytical Reading and Reasoning</option>
+                        <option value="Economics For I.T Professionals" class="form-control">Economics For I.T Professionals</option>
+                    </select>
+                </div>
+                <div class="container">
+                    <label for="level" class="label form-control form-wrapper border-0 text-start">Level</label>
+                    <select class="level form-control  form-data bg-black text-white" id="level" name="level">
+                        <option value="--select level--">--Select Year--</option>
+                        <option value="100" class="form-control">100</option>
+                        <option value="200" class="form-control">200</option>
+                        <option value="300" class="form-control">300</option>
+                        <option value="400" class="form-control">400</option>
+                    </select>
+                </div>
+
+                <div class="container">
+                    <label for="level" class="label form-control form-wrapper border-0 text-start">Semester</label>
+                    <select class="level form-control  form-data bg-black text-white" id="semester" name="semester">
+                        <option value="--select level--">--Select Semester--</option>
+                        <option value="Semester 1" class="form-control">1</option>
+                        <option value="Semester 2" class="form-control">2</option>
+                    </select>
+                </div>
+
+                <div class="container my-2">
+                    <label for="question-paper" class="label form-control form-wrapper border-0 text-start">Select File</label>
+                    <input type="file" class="form-control form-data  bg-black text-white" name="question-paper" id="question-paper">
+                </div>
+
+                <div class="container">
+                    <button type="submit" id="submit" class="btn btn-secondary bg-black text-white text-start px-5 py-2 my-3" >Add</button>
+                </div>
+            </form>
+        </div>
+    </section>
+     <!-- Modal -->
+  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-title">Upload Success</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Will you upload again?
+        </div>
+        <div class="modal-footer">
+          <a href="/">
+            <button type="button" class="btn btn-secondary mx-2">Close</button>
+          </a>
+          <a href="/upload">
+            <button type="button" class="btn btn-primary mx-2">Upload</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2--- Empty field -->
+  <div class="modal fade" id="modal-empty" tabindex="-1" role="dialog" aria-labelledby="modal-dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-title">Empty Fields</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Please fill all fields.
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-warning mx-2" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+<script>
+    let form = document.getElementById('upload-form')
+    let arr = Array.from(document.getElementsByTagName('select'))
+    
+    let year = document.getElementById('year')
+    let level = document.getElementById('level')
+    let program = document.getElementById('program')
+    let semester = document.getElementById('semester')
+    let course = document.getElementById('course')
+    let file = document.querySelector('input[type="file"]')
+
+    let controller = new AbortController()
+    let signal = controller.signal
+
+    signal.addEventListener('abort',()=>{
+        $('#modal-empty').modal('show')
+    },false)
+
+    form.addEventListener('submit',(event)=>{
+        event.preventDefault()
+                //check for empty fields
+                Array.from(document.getElementsByTagName('select')).forEach(ele=>{
+                    if (ele.value == "" || !file.files[0]){
+                        controller.abort()
+                    }
+                })
+
+                
+                let formdata = new FormData()
+                formdata.append('year',year.value)
+                formdata.append('course',course.value)
+                formdata.append('level',level.value)
+                formdata.append('program',program.value)
+                formdata.append('semester',semester.value)
+                formdata.append('file',file.files[0])
+
+                //initiate request
+                fetch('/questions', {
+                    method: 'POST',
+                    body: formdata,
+                    signal: signal
+                  })
+                    .then((response) => response.json())
+                    .then((result) => {
+                        $('#modal').modal('show')
+                      console.log('Success:', result);
+                    })
+                    .catch((error) => {
+                      console.error('Error:', error);
+                    });
+    },false)
+
+    course.addEventListener('change',()=>{
+      console.log(course.value)
+  })
+
+</script>
+{%endblock %}

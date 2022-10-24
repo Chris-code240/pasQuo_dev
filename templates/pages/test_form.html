@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section class="container d-flex flex-column align-items-center justify-content-center p-3">
+        <div class="container my-2">
+            <h1 class="text-center">
+                Welcome to the Library
+            </h1>
+            <p class="text-center w-10">
+                Access a list of all your pas
+                questionst from 2017 to date .
+            </p>
+        </div>
+        <div class="container bg-secondary  p-5 rounded-lg d-flex justify-content-center align-items-center form-wrapper">
+            
+            <form id="library-form" class="form text-center p-0 w-100 form-control form-wrapper" method="post" action="{{url_for('get_questions')}}" >
+                <div class="container w-20">
+                    <select class="level form-control py-2 my-3 form-data bg-black text-white" id="program" name="program">
+                        <option value="--select program--" class="form-control">--Select Program--</option>
+                        <option value="Bsc Computer Science" class="form-control">Bsc Computer Science</option>
+                        <option value="Bsc Information Technology" class="form-control">Bsc Information Technology</option>
+                    </select>
+                </div>
+    
+                <div class="container">
+                    <select class="level form-control py-2 my-3 form-data bg-black text-white" id="level" name="level">
+                        <option value="--select level--">--Select Level--</option>
+                        <option value="100" class="form-control">100</option>
+                        <option value="200" class="form-control">200</option>
+                        <option value="300" class="form-control">300</option>
+                        <option value="400" class="form-control">400</option>
+                    </select>
+                </div>
+    
+                <div class="container">
+                    <select class="level form-control py-2 my-3 form-data bg-black text-white" id="course" name="course">
+                        <option value="--select course--">--Select Course--</option>
+                        <option value="Advanced Database" class="form-control">Advanced</option>
+                        <option value="Numerical Methods" class="form-control">Numerical Methods</option>
+                        <option value="Software Engineering" class="form-control">Software Enginerring</option>
+                        <option value="Computer Architecture" class="form-control">Computer Architecture</option>
+                    </select>
+                </div>
+                
+    
+                <div class="container">
+                    <select class="level form-control py-2 my-3 form-data bg-black text-white" id="year" name="year">
+                        <option value="--select year--" class="form-control">--Select Year--</option>
+                        <option value="2017" class="form-control">2017</option>
+                        <option value="2018" class="form-control">2018</option>
+                        <option value="2019" class="form-control">2019</option>
+                        <option value="2020" class="form-control">2020</option>
+                        <option value="2021" class="form-control">2021</option>
+                    </select>
+                </div>
+                <input type="file" name="question-paper" id="question-paper">
+                <div class="container d-flex justify-content-end">
+                    <button type="submit" id="submit" class="btn btn-secondary bg-black text-white  px-5">Search</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <script>
+        let form = document.getElementById('library-form')
+        document.getElementById('submit').onclick = ()=>{
+            let year = document.getElementById('year').value
+            let prog = document.getElementById('program').value
+            let level = document.getElementById('level').value
+            let course = document.getElementById('course').value
+
+            let req = new XMLHttpRequest()
+            req.setRequestHeader('Content-Type','application/json')
+            req.open('POST','/test-form')
+            req.send(JSON.stringify({"year":year,"program":prog,"level":level,"course":course}))
+
+        }
+    </script>
+</body>
+</html>
